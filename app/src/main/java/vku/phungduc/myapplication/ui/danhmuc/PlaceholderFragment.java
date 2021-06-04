@@ -53,6 +53,7 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_danhmuc_chitiet, container, false);
+
 //        final TextView textView = root.findViewById(R.id.textView4);
 //        textView.setText("chafo" + danhmucs.get(index).getImg());
         addControl(root);
@@ -83,7 +84,7 @@ public class PlaceholderFragment extends Fragment {
 
             @Override
             public void onFailure(Call<result_congthuc> call, Throwable t) {
-                Toast.makeText(getContext(), "lloix rồi" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Mời bạn kiểm tra internet" , Toast.LENGTH_LONG).show();
             }
         });
     }

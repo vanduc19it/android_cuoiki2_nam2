@@ -29,7 +29,7 @@ public class URLImageParser implements Html.ImageGetter {
             byte[] data = Base64.decode(base_64_source, Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             Drawable image = new BitmapDrawable(context.getResources(), bitmap);
-            image.setBounds(0, 0, 0 + image.getIntrinsicWidth(), 0 + image.getIntrinsicHeight());
+            image.setBounds(0, 80, 0 + image.getIntrinsicWidth()+100, 0 + image.getIntrinsicHeight()+80);
             return image;
         } else {
             URLDrawable urlDrawable = new URLDrawable();
@@ -54,16 +54,16 @@ public class URLImageParser implements Html.ImageGetter {
 
         @Override
         protected void onPostExecute(Drawable result) {
-            urlDrawable.setBounds(0, 0, 0 + result.getIntrinsicWidth(), 0 + result.getIntrinsicHeight()); //set the correct bound according to the result from HTTP call
-            urlDrawable.drawable = result; //change the reference of the current drawable to the result from the HTTP call
-            URLImageParser.this.container.invalidate(); //redraw the image by invalidating the container
+            urlDrawable.setBounds(0, 80, 0 + result.getIntrinsicWidth()+100, 0 + result.getIntrinsicHeight()+80);
+            urlDrawable.drawable = result;
+            URLImageParser.this.container.invalidate();
         }
 
         public Drawable fetchDrawable(String urlString) {
             try {
                 InputStream is = (InputStream) new URL(urlString).getContent();
                 Drawable drawable = Drawable.createFromStream(is, "src");
-                drawable.setBounds(0, 0, 0 + drawable.getIntrinsicWidth(), 0 + drawable.getIntrinsicHeight());
+                drawable.setBounds(0, 80, 0 + drawable.getIntrinsicWidth()+100, 0 + drawable.getIntrinsicHeight()+80);
                 return drawable;
             } catch (Exception e) {
                 return null;

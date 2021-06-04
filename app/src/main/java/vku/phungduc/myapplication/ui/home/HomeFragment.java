@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<result_tintuc> call, Throwable t) {
-                Toast.makeText(getContext(), "lỗi rồi nha" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Mời bạn kiểm tra lại internet" , Toast.LENGTH_LONG).show();
                 loading.dismiss();
             }
         });

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
 
-                Toast.makeText(MainActivity.this ,  "đéo choi nưa " , Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this ,  "hic" , Toast.LENGTH_LONG).show();
 
             }
         }

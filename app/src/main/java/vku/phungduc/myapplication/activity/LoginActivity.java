@@ -35,7 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar() ;
         actionBar.hide();
 
-
         user = findViewById(R.id.editText_username) ;
         pass = findViewById(R.id.editText_pass) ;
 

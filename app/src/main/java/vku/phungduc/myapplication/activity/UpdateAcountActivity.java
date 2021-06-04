@@ -78,7 +78,6 @@ public class UpdateAcountActivity extends AppCompatActivity {
         img_updateAvatar = findViewById(R.id.img_updateAvatar) ;
     }
     public void setData(){
-
         edit_updateAbout.setText(currentUser.getAbout());
         edit_updateEmail.setText(currentUser.getEmail());
         edit_updateName.setText(currentUser.getTen());
@@ -110,6 +109,7 @@ public class UpdateAcountActivity extends AppCompatActivity {
                     currentUser.setEmail(   edit_updateEmail.getText().toString());
                     currentUser.setTen( edit_updateName.getText().toString());
                     currentUser.setImg_user(userImage);
+                    Log.d("UUU", "onResponse: " + userImage);
                     Snackbar.make(view, "Cập nhật thông tin thành công ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -131,7 +131,7 @@ public class UpdateAcountActivity extends AppCompatActivity {
         String[] mangtenfile = file_path.split("\\.") ;
 
         file_path = mangtenfile[0] + System.currentTimeMillis() +"." + mangtenfile[1] ;
-        userImage = file_path ;
+        getNameImage(file_path);
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file) ;
         MultipartBody.Part body = MultipartBody.Part.createFormData("uploaded_img", file_path, requestBody) ;
         return body ;
@@ -141,12 +141,6 @@ public class UpdateAcountActivity extends AppCompatActivity {
         if ( requestCode == 123  && resultCode == RESULT_OK  && data != null){
             Uri uri = data.getData() ;
             realpath = getRealPathFromUri(uri) ;
-            File file = new File(realpath) ;
-            String file_path = file.getAbsolutePath() ;
-            String[] mangtenfile = file_path.split("\\.") ;
-
-            file_path = mangtenfile[0] + System.currentTimeMillis() +"." + mangtenfile[1] ;
-            userImage = file_path ;
             try{
                 InputStream inputStream = getContentResolver().openInputStream(uri) ;
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream) ;
@@ -167,6 +161,11 @@ public class UpdateAcountActivity extends AppCompatActivity {
         }
         cursor.close();
         return path ;
+    }
+    public void  getNameImage(String s ){
+        String[] mangtenfile = s.split("/") ;
+        userImage = mangtenfile[mangtenfile.length-1] ;
+
     }
 
 }
