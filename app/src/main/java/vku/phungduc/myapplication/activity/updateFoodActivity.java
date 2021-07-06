@@ -1,5 +1,6 @@
 package vku.phungduc.myapplication.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -37,6 +38,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vku.phungduc.myapplication.MainActivity;
 import vku.phungduc.myapplication.R;
 import vku.phungduc.myapplication.URLImageParser;
 import vku.phungduc.myapplication.api.ApiService;
@@ -48,6 +50,7 @@ import static vku.phungduc.myapplication.constant.currentUser;
 import static vku.phungduc.myapplication.constant.danhmucs;
 import static vku.phungduc.myapplication.constant.find_IdDanhmuc;
 import static vku.phungduc.myapplication.constant.find_nameDanhmuc;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class updateFoodActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -57,6 +60,8 @@ public class updateFoodActivity extends AppCompatActivity implements AdapterView
     Congthuc congthuc ;
     List<String> list ;
     int idDanhmuc = -1 ;
+    ProgressDialog loading  = null  ;
+
     private EditText edit_nameFood  , edit_moTa , edit_nguyenLieu , edit_step, edit_danhmuc;
     private Spinner spinner_danhmuc ;
     private Button btn_postFood  ;
@@ -88,7 +93,7 @@ public class updateFoodActivity extends AppCompatActivity implements AdapterView
             edit_nameFood.setText(congthuc.getTen_monAn());
             edit_moTa.setText(congthuc.getMoTa());
             edit_nguyenLieu.setText(Html.fromHtml(congthuc.getNguyenLieu()));
-            Picasso.with(getApplicationContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_monAn/"+ congthuc.getImg())
+            Picasso.with(getApplicationContext()).load(url_api +"/do_an_2/image/img_monAn/"+ congthuc.getImg())
                     .into(img_postFood);
             edit_step.setText( Html.fromHtml(congthuc.getStep(), new URLImageParser(edit_step , getApplicationContext()), null) );
 
@@ -127,6 +132,8 @@ public class updateFoodActivity extends AppCompatActivity implements AdapterView
     }
 
     public void update(View v){
+        loading = ProgressDialog.show(v.getContext(),null,"Loading...",false,false);
+
         String congthuc1 = new Gson().toJson(new PostCongthuc(
                 Integer.parseInt(currentUser.getId()),
                 idDanhmuc,
@@ -136,8 +143,8 @@ public class updateFoodActivity extends AppCompatActivity implements AdapterView
                 edit_step.getText().toString()
 
         )) ;
-        Snackbar.make(v, congthuc1, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+//        Snackbar.make(v, congthuc1, Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show();
 
         MultipartBody.Part data =  MultipartBody.Part.createFormData("update_congthuc", congthuc1) ;
         MultipartBody.Part id = MultipartBody.Part.createFormData("id",congthuc.getId()+"") ;
@@ -145,15 +152,23 @@ public class updateFoodActivity extends AppCompatActivity implements AdapterView
         ApiService.apiService.postUpdateCongthuc(getImageBody(), data , id).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                String s = response.body() ;
-                Snackbar.make(v, s, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                loading.dismiss();
+//                if( response.body().equals(1)){
+                    Snackbar.make(v, "Cập nhật thất bại" , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                }else {
+//                    Snackbar.make(v, "Cập nhật thất bại", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+//                }
+
 
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Snackbar.make(v, t.getMessage(), Snackbar.LENGTH_LONG)
+                loading.dismiss();
+                Snackbar.make(v, "Cập nhật thất bại", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

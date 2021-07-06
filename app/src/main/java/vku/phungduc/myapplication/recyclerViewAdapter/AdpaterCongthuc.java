@@ -26,6 +26,7 @@ import vku.phungduc.myapplication.model.congthuc.Congthuc;
 import vku.phungduc.myapplication.model.tintuc.TinTuc;
 
 import static vku.phungduc.myapplication.constant.currentUser;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class AdpaterCongthuc extends RecyclerView.Adapter<AdpaterCongthuc.CallViewHolder> {
     private List<Congthuc> congthucs ;
@@ -56,7 +57,7 @@ public class AdpaterCongthuc extends RecyclerView.Adapter<AdpaterCongthuc.CallVi
         Congthuc congthuc = congthucs.get(position) ;
 
         holder.nameCongthuc.setText(congthuc.getTen_monAn());;
-        Picasso.with(this.activity).load("https://phungweb.000webhostapp.com/do_an_2/image/img_monAn/"+ congthuc.getImg())
+        Picasso.with(this.activity).load(url_api+"/do_an_2/image/img_monAn/"+ congthuc.getImg())
                 .into(holder.imageCongthuc);
         holder.nameUser.setText(congthuc.getTenUser());
 

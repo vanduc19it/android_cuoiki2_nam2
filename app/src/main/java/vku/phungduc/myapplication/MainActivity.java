@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void askPermissionAndCall(Activity activity){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int sendSmsPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) ; // check quyền có đã bật hay chưa
+            int sendSmsPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE) ;
 
-            if( sendSmsPermission != PackageManager.PERMISSION_GRANTED) { // nếu quyền  ko bật thì mở một request đòi bật quyền truy cập lên
+            if( sendSmsPermission != PackageManager.PERMISSION_GRANTED) {
                 activity.requestPermissions(
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMINSSION_REQUEST_CODE_ALL_PHONE

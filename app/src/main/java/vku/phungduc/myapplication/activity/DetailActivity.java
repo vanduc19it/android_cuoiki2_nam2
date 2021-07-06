@@ -40,6 +40,7 @@ import vku.phungduc.myapplication.recyclerViewAdapter.AdapterComent;
 
 import static vku.phungduc.myapplication.constant.currentUser;
 import static vku.phungduc.myapplication.constant.find_nameDanhmuc;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class DetailActivity extends AppCompatActivity {
     private Congthuc congthuc ;
@@ -81,9 +82,9 @@ public class DetailActivity extends AppCompatActivity {
 
             txv_nguyenlieu   .setText(Html.fromHtml(congthuc.getNguyenLieu() ));
 
-            Picasso.with(getApplicationContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_user/"+ congthuc.getImg_user())
+            Picasso.with(getApplicationContext()).load(url_api+"/do_an_2/image/img_user/"+ congthuc.getImg_user())
                     .into(imgUser);
-            Picasso.with(getApplicationContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_monAn/"+ congthuc.getImg())
+            Picasso.with(getApplicationContext()).load(url_api + "/do_an_2/image/img_monAn/"+ congthuc.getImg())
                     .into(imgFood);
 
         }

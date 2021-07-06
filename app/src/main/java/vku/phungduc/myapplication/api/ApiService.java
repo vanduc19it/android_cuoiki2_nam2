@@ -26,16 +26,18 @@ import vku.phungduc.myapplication.model.danhmuc.result_danhmuc;
 import vku.phungduc.myapplication.model.tintuc.result_tintuc;
 import vku.phungduc.myapplication.model.user.result_user;
 
+import static vku.phungduc.myapplication.constant.url_api;
+
 public interface ApiService {
 
-    // api : http://apilayer.net/api/live?access_key=843d4d34ae72b3882e3db642c51e28e6&currencies=VND&source=USD&format=1
 
     Gson gson = new GsonBuilder()
             .setLenient()
             .create();
 
     ApiService  apiService = new Retrofit.Builder()
-            .baseUrl("https://phungweb.000webhostapp.com/api/")
+            .baseUrl(url_api+ "/api/")
+               // .baseUrl("http://192.168.1.148/api1/") //http://localhost/api1/foodRecipes/
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class) ;
@@ -67,6 +69,9 @@ public interface ApiService {
     @GET("foodRecipes/getComment.php")
     Call<result_comment> getCommentApi(@Query("idMon_an") String idMon_an) ;
 
+    @GET("foodRecipes/sendCode.php")
+    Call<String> getCodePass(@Query("email") String email);
+
 
 
     @Multipart
@@ -93,6 +98,10 @@ public interface ApiService {
     @Multipart
     @POST("foodRecipes/XoaCongThuc.php")
     Call<String> postDeleteFood(@Part MultipartBody.Part id, @Part MultipartBody.Part idUser ) ;
+
+    @Multipart
+    @POST("foodRecipes/updatePass.php")
+    Call<String> postUpdatePass(@Part MultipartBody.Part pass, @Part MultipartBody.Part email ) ;
 
 
 }

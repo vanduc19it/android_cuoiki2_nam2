@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
         user = findViewById(R.id.editText_username) ;
         pass = findViewById(R.id.editText_pass) ;
-
+        TextView quenPass = findViewById(R.id.txv_quenPass);
         Button btn_login = findViewById(R.id.btn_login) ;
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                                 .setAction("Action", null).show();
                     }
                 });
+            }
+        });
+
+        quenPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), forgotPassActivity.class));
             }
         });
     }

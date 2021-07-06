@@ -1,11 +1,14 @@
 package vku.phungduc.myapplication.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,12 +40,15 @@ import static vku.phungduc.myapplication.constant.currentUser;
 public class QuanLyCongThucAcitivity extends AppCompatActivity {
     private AdapterQLCongthuc adapter;
     private  ArrayList<Congthuc> arrayList ;
+    ProgressBar progressDialog  ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_cong_thuc);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressDialog = findViewById(R.id.progressBar2);
+        progressDialog.setVisibility(View.VISIBLE);
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.rcv_quanlicongthuc);
         recyclerView.setHasFixedSize(true);
 
@@ -58,9 +64,11 @@ public class QuanLyCongThucAcitivity extends AppCompatActivity {
 
     }
     public void createData(){
+
         ApiService.apiService.getCongthucApi_user(currentUser.getId()).enqueue(new Callback<result_congthuc>() {
             @Override
             public void onResponse(Call<result_congthuc> call, Response<result_congthuc> response) {
+                progressDialog.setVisibility(View.GONE);
                 result_congthuc resultCongthuc = response.body() ;
                 for ( Congthuc item: resultCongthuc.getData() ) {
                     arrayList.add(item );
@@ -70,6 +78,7 @@ public class QuanLyCongThucAcitivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<result_congthuc> call, Throwable t) {
+                progressDialog.setVisibility(View.GONE);
 
             }
         });

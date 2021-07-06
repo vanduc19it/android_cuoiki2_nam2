@@ -37,6 +37,7 @@ import vku.phungduc.myapplication.model.user.User;
 
 import static vku.phungduc.myapplication.constant.checkUser;
 import static vku.phungduc.myapplication.constant.currentUser;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class AcountFragment extends Fragment {
 
@@ -161,7 +162,7 @@ public class AcountFragment extends Fragment {
 
             txt_username.setText(user.getTen().toString());
 
-            Picasso.with(view.getContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_user/"+ user.getImg_user())
+            Picasso.with(view.getContext()).load(url_api+ "/do_an_2/image/img_user/"+ user.getImg_user())
                     .into(img_user);
 
 

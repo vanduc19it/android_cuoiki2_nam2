@@ -11,7 +11,11 @@ import vku.phungduc.myapplication.model.user.User;
 
 public class constant {
 
+   // public static String url_api  = "https://phungweb.000webhostapp.com";
+    public static String url_api  = "http://192.168.1.148";
+
     public static User currentUser = null  ;
+
     public static boolean checkUser = false  ;
     public static List<Danhmuc> danhmucs = new ArrayList<Danhmuc>();
 

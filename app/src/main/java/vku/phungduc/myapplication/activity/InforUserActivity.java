@@ -36,6 +36,7 @@ import vku.phungduc.myapplication.recyclerViewAdapter.AdpaterCongthuc;
 import vku.phungduc.myapplication.recyclerViewAdapter.ListDataAdapter;
 
 import static vku.phungduc.myapplication.constant.currentUser;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class InforUserActivity extends AppCompatActivity {
     private User user ;
@@ -149,7 +150,7 @@ public class InforUserActivity extends AppCompatActivity {
             txv_inforAbout.setText(user.getAbout());
         txv_inforName.setText(user.getTen());
         txv_inforUserName.setText(user.getHo_va_ten());
-        Picasso.with(getApplicationContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_user/" + user.getImg_user())
+        Picasso.with(getApplicationContext()).load(url_api+"/do_an_2/image/img_user/" + user.getImg_user())
                 .into(img_inforUser);
     }
 

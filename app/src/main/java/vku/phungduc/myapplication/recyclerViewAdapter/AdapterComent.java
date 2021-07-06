@@ -20,6 +20,8 @@ import java.util.List;
 import vku.phungduc.myapplication.R;
 import vku.phungduc.myapplication.model.comment.Comment;
 
+import static vku.phungduc.myapplication.constant.url_api;
+
 public class AdapterComent extends RecyclerView.Adapter<AdapterComent.CallViewHolder> {
     private List<Comment> comments  ;
     private Activity activity ;
@@ -46,7 +48,7 @@ public class AdapterComent extends RecyclerView.Adapter<AdapterComent.CallViewHo
         holder.txv_createAt.setText(comment.getNgay());
         holder.txv_content.setText(comment.getNoiDung());
 
-        Picasso.with(context).load("https://phungweb.000webhostapp.com/do_an_2/image/img_user/"+ comment.getImg_user())
+        Picasso.with(context).load(url_api+ "/do_an_2/image/img_user/"+ comment.getImg_user())
                 .into(holder.img_user);
 
 

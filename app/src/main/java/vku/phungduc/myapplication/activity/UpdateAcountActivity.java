@@ -32,11 +32,13 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vku.phungduc.myapplication.MainActivity;
 import vku.phungduc.myapplication.R;
 import vku.phungduc.myapplication.api.ApiService;
 import vku.phungduc.myapplication.model.user.UserUpdate;
 
 import static vku.phungduc.myapplication.constant.currentUser;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class UpdateAcountActivity extends AppCompatActivity {
     private EditText edit_updateName , edit_updateEmail ,edit_updateAbout ;
@@ -82,7 +84,7 @@ public class UpdateAcountActivity extends AppCompatActivity {
         edit_updateEmail.setText(currentUser.getEmail());
         edit_updateName.setText(currentUser.getTen());
 
-        Picasso.with(getApplicationContext()).load("https://phungweb.000webhostapp.com/do_an_2/image/img_user/"+ currentUser.getImg_user())
+        Picasso.with(getApplicationContext()).load(url_api+ "/do_an_2/image/img_user/"+ currentUser.getImg_user())
                 .into(img_updateAvatar);
     }
     @Override
@@ -112,6 +114,7 @@ public class UpdateAcountActivity extends AppCompatActivity {
                     Log.d("UUU", "onResponse: " + userImage);
                     Snackbar.make(view, "Cập nhật thông tin thành công ", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
 
 

@@ -22,6 +22,7 @@ import vku.phungduc.myapplication.model.congthuc.Congthuc;
 
 import static vku.phungduc.myapplication.constant.danhmucs;
 import static vku.phungduc.myapplication.constant.find_nameDanhmuc;
+import static vku.phungduc.myapplication.constant.url_api;
 
 public class AdapterQLCongthuc extends RecyclerView.Adapter<AdapterQLCongthuc.ViewHolder>{
     ArrayList<Congthuc> quanlicongthucArrayList;
@@ -48,7 +49,7 @@ public class AdapterQLCongthuc extends RecyclerView.Adapter<AdapterQLCongthuc.Vi
         holder.txvdanhmuc.setText( find_nameDanhmuc(congthuc.getIdDanhmuc()) );
         holder.txvNgayDang.setText(congthuc.getNgayDang());
         holder.txvNameUser.setText(congthuc.getTenUser());
-        Picasso.with(context).load("https://phungweb.000webhostapp.com/do_an_2/image/img_monAn/"+ congthuc.getImg())
+        Picasso.with(context).load(url_api+"/do_an_2/image/img_monAn/"+ congthuc.getImg())
                 .into(holder.imageFood);
 
 

@@ -33,6 +33,8 @@
         <activity android:name=".activity.InforUserActivity"/>
         <activity android:name=".activity.updateFoodActivity"/>
         <activity android:name=".activity.UpdateAcountActivity"/>
+        <activity android:name=".activity.forgotPassActivity"/>
+        <activity android:name=".activity.updatePassActivity"/>
     </application>
 
 </manifest>
